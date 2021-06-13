@@ -16,12 +16,19 @@ public class UserDao {
 
     public static Dao<User, String> get() throws SQLException{
         if (userDao == null) {
+            init();
             userDao = DaoManager.createDao(
                     GetConnectionSource(),
                     User.class
             );
         }
         return userDao;
+    }
+
+    public static void init() {
+        try {
+            TableUtils.createTable(GetConnectionSource(), User.class);
+        } catch (Exception ignored) {}
     }
 
     public static ConnectionSource GetConnectionSource() throws SQLException {

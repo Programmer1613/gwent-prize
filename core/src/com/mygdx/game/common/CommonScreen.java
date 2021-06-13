@@ -2,14 +2,17 @@ package com.mygdx.game.common;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
 
 public class CommonScreen implements Screen {
 
     public MyGdxGame game;
+    public SpriteBatch batch;
 
     public CommonScreen(MyGdxGame game) {
         this.game = game;
+        this.batch = game.getBatch();
     }
 
     @Override

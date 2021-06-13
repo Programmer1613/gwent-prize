@@ -35,6 +35,14 @@ public class User implements Serializable {
         return this.isActive;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public boolean getIsActive() {
+        return isActive;
+    }
+
     @Override
     public String toString() {
         return "User{" +

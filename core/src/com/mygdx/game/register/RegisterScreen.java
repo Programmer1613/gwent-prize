@@ -27,6 +27,8 @@ public class RegisterScreen extends CommonScreen {
     Sprite bg;
     TextField textFieldAccount, textFieldPassword;
     Button enterGame;
+    BitmapFont front;
+    String currentHint = "Please Input account & Password";
 
 
     public RegisterScreen(MyGdxGame game) {
@@ -35,6 +37,10 @@ public class RegisterScreen extends CommonScreen {
 
     @Override
     public void show() {
+        front = new BitmapFont();
+        front.setColor(1, 0, 0, 1);
+        front.getData().setScale(1.0f);
+
         bg = new Sprite(new Texture("texture/register_bg"));
         bg.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -75,8 +81,9 @@ public class RegisterScreen extends CommonScreen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.getBatch().begin();
-        bg.draw(game.getBatch());
+        batch.begin();
+        bg.draw(batch);
+        front.draw(batch, currentHint, 100, 150);
         game.getBatch().end();
         stage.act();
         stage.draw();
@@ -91,11 +98,17 @@ public class RegisterScreen extends CommonScreen {
             UserDao.get().createIfNotExists(new User(account, password));
             user = UserDao.get().queryForId(account);
         } catch (SQLException e) {
+            Gdx.app.log("sql", e.toString());
             return;
         }
 
         if (user.tryLogin(account, password)) {
             Global.currentUser = user;
+            currentHint = "login success";
+        } else if (user.getIsActive()) {
+            currentHint = "password wrong";
+        } else {
+            currentHint = "wait to active account";
         }
     }
 }
