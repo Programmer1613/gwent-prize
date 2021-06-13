@@ -15,9 +15,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.common.CommonScreen;
-import dao.UserDao;
-import model.Global;
-import model.User;
+import com.mygdx.game.dao.UserDao;
+import com.mygdx.game.main_menu.Cover;
+import com.mygdx.game.model.Global;
+import com.mygdx.game.model.User;
 
 import java.sql.SQLException;
 

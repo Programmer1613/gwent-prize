@@ -1,6 +1,4 @@
-package model;
-
-import model.User;
+package com.mygdx.game.model;
 
 public class Global {
     public static User currentUser = null;

@@ -1,33 +1,31 @@
-package dao;
-
-import java.sql.SQLException;
+package com.mygdx.game.dao;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
-import com.j256.ormlite.stmt.query.In;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.mygdx.game.model.Activity;
 
-import model.User;
+import java.sql.SQLException;
 
-public class UserDao {
-    private static Dao<User, String> userDao;
+public class ActivityDao {
+    private static Dao<Activity, String> dao;
 
-    public static Dao<User, String> get() throws SQLException{
-        if (userDao == null) {
+    public static Dao<Activity, String> get() throws SQLException{
+        if (dao == null) {
             init();
-            userDao = DaoManager.createDao(
+            dao = DaoManager.createDao(
                     GetConnectionSource(),
-                    User.class
+                    Activity.class
             );
         }
-        return userDao;
+        return dao;
     }
 
     public static void init() {
         try {
-            TableUtils.createTable(GetConnectionSource(), User.class);
+            TableUtils.createTable(GetConnectionSource(), Activity.class);
         } catch (Exception ignored) {}
     }
 
